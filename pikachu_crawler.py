@@ -162,7 +162,6 @@ savedwithCSV: 將爬取到的 imgLink 以 csv 格式儲存起來
 savedwithPIC: 將爬取到的 imgLink 中的圖片都下載下來
 　　　　　    經過觀察，開頭為 data 的即為遷入網頁的圖片，其為 64 位元編碼，使用 base64 套件進行還原即可
              開頭非 data 的是圖片的儲存連結，要用 requests.get方式取得
-
 '''
 class dataStorage:
     def __init__(self):
@@ -250,7 +249,6 @@ if __name__ == '__main__':
     dataStore.checkAndmakeFolder(csv_Path)
     dataStore.checkAndmakeFolder(pic_Path)
 
-
     # 爬取圖片，當dataStatus不為 3 時，重複進行畫面下拉的動作
     # 過程中可能出現拉到底的狀況，此時 temp 的值和getScrollHeight取得的值會一樣
     # 當dataStatus值不為 3 且 temp 和 getScrollHeight值一樣時，代表拉到底，且有「載入更多」的按鈕
@@ -263,7 +261,7 @@ if __name__ == '__main__':
             googleImg.clickBotton()
     
     img_link = googleImg.getImgLink(soup)
-    #去除重複的link
+    #使用set去除重複的link
     img_link = list(set(img_link))
     
     # 以下兩個可以挑選其中一個使用，或者同時將資料下載，並將連結以 csv 檔方式儲存
